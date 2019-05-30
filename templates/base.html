@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <style type="text/css">
+    .footer{
+      left: 0;
+      width: 100%;
+      text-align: center;
+      position: fixed;
+    }
+  </style>
+  {% block head %}
+  {% endblock %}
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Daily News</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item {% block home %}{% endblock %}">
+        <a class="nav-link" href="{% url 'newsapp:home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item {% block newslist %}{% endblock %}">
+        <a class="nav-link" href="{% url 'newsapp:newslist' %}">News List</a>
+      </li>
+      <li class="nav-item {% block categorylist %}{% endblock %}">
+        <a class="nav-link" href="{% url 'newsapp:categorylist' %}">News List</a>
+      </li>
+      
+      <li class="nav-item dropdown {% block categories %}{% endblock %}">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categories
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'newsapp:newscreate' %}">create news</a>
+          {% for category in allcategory %}
+          <a class="dropdown-item" href="{% url 'newsapp:categorydetail' category.id %}">{{category.title}}</a>
+          <div class="dropdown-divider"></div>
+          {% endfor %}
+          
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'newsapp:login' %}">Login</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="{% url 'newsapp:citycreate' %}">Add City</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'newsapp:weather' %}">Weather</a>
+      </li>
+    </ul>
+    {% if request.user.is_authenticated %}
+    {{request.user.username}}
+     <a href="{% url 'newsapp:logout' %}">LogOut</a>
+  
+    {% else %}
+    <a href="{% url 'newsapp:login' %}">Login</a>
+
+    {% endif %}
+
+
+   
+  </div>
+</nav>
+
+
+
+
+{% block body %}
+
+{% endblock %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block active3 %}active{% endblock %}
+{% block css %}
+<style type="text/css">
+  img:hover
+  {
+    transform:scale(1.1);
+  }
+
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+     <!-- ##### Editorial Post Area Start ##### -->
+     <div class="editors-pick-post-area ">
+        <div class="container">
+            <div class="row">
+                <!-- Editors Pick -->
+                    <div class="col-12 col-md-5 col-lg-8">
+                      <div class="container">
+                        <br>
+                        <div class="section-heading">
+                        <h6>Today's Headlines</h6>
+                        </div>
+                        <div class="row">
+                          <div class="serv-items" id="isotope-items">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 serv-item isotope-item dental">
+
+                              <div class="serv-item-text">
+                                
+                               {% for news in newslist %}
+                                <div class="row">
+                                <div class="col-md-5" style="width:600px;">
+                                <a href="{% url 'newsapp:newsdetail' news.id %}"><img src="{{ news.image.url }}" class="img-fluid" style="height:175px; width:600px; object-fit: cover;"></a>
+                                
+                                </div>
+                                <div class="col-md-7">
+                                <a href="{% url 'newsapp:newsdetail' news.id %}"><h4>{{news.title}}</h4></a>
+                                <p style="height:110px; width:400px; overflow:hidden; margin-right:100px; text-align:justify;">{{news.description|safe|striptags}}</p>
+                                 </div>
+                                </div>
+                                <br>
+                                <br>
+                                  {% endfor %} 
+                              </div>
+                               {% if is_paginated %}
+                                      <ul class="pagination">
+                                        {% if page_obj.has_previous %}
+                                          <li  style="padding: 10px"><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                                        {% else %}
+                                          <li class="disabled"><span style="padding: 3px 5px 10px 10px ; ">&laquo;</span></li>
+                                        {% endif %}
+                                        {% for i in paginator.page_range %}
+                                          {% if page_obj.number == i %}
+                                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                          {% else %}
+                                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                          {% endif %}
+                                        {% endfor %}
+                                        {% if page_obj.has_next %}
+                                          <li style="padding: 10px"><a href="?page={{ page_obj.next_page_number }}" >&raquo;</a></li>
+                                        {% else %}
+                                          <li class="disabled"><span style="padding: 3px 5px 10px 10px ; ">&raquo;</span></li>
+                                        {% endif %}
+                                      </ul>
+                                    {% endif %}
+                            </div>
+                            </div>            
+                    </div>
+                    </div>
+                </div>
+
+
+
+                <!-- World News -->
+                <div class="col-12 col-md-5 col-lg-4">
+                    <br>
+                    <div class="section-heading">
+                        <h6>World hot affairs</h6>
+                    </div>
+
+                    <!-- Single Post -->
+                    {% for news in newslist|slice:'4' %}
+                    <div class="single-blog-post style-2">
+                        <div class="post-thumb">
+                            <a href="#"><img src="{{news.image.url}}"  style="height:100.55px; width:200.6px; object-fit: cover;" alt=""></a>
+                        </div>
+                        <div class="post-data">
+                            <a href="#" class="post-title">
+                                <h6>{{news.title}}</h6>
+                            </a>
+                            <div class="post-meta">
+                                <div class="post-date"><a href="#">{{news.author}}</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block js %}
+       
+    {% endblock %}
+{% endblock %}

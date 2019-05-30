@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block active1 %} active{% endblock %}
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+ {% endblock %}
+ {% block css %}
+ <style type="text/css">
+     img:hover
+     {
+        transform: scale(1.1);
+     }
+ </style>
+ {% endblock %}
+{% block body %}
+<!-- 
+<section class="details-card">
+    <div class="container">
+      <h3>{{postcategorydetail.title}}</h3>
+        <div class="row">
+          
+          {% for news in postcategorydetail.posts.all %}
+
+            <div class="col-md-4">
+                <div class="card-content">
+                    <div class="card-img">
+                        <img src="{{news.image.url}}" class="img-fluid" width="150px" >
+                        
+                    </div>
+                    <div class="card-desc">
+                       
+                        
+                            <a href="{% url 'newsapp:postdetail' news.id %}" class="btn-card">{{ news.title|title }}</a>   
+
+                    </div>
+
+              
+          {% endfor %}
+      </div>
+    </div>
+</section> -->
+<!-- details card section starts from here -->
+
+<div class="popular-news-area section-padding-80-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="section-heading">
+                        <h6>{{categorydetail.name}} News</h6>
+                    </div>
+
+                    <div class="row">
+                              {% for post in categorydetail.news.all  %}
+                         <div class="col-12 col-md-6">
+                            <div class="single-blog-post style-3">
+                                <div class="post-thumb">
+                                    <a href="{% url 'newsapp:newsdetail' post.id %}"><img src="{{post.image.url}}" alt="" style="height:300px; width:500px;"></a>
+                                </div>
+                                <div class="post-data">
+                                    <a href="#" class="post-catagory">{{post.category}}</a>
+                                    <a href="{% url 'newsapp:newsdetail' post.id %}" class="post-title">
+                                        <h6>{{post.title}}</h6>
+                                    </a>
+                                    <a href="{% url 'newsapp:newsdetail' post.id %}"><h2>{{post.description|striptags|safe|truncatechars:'100'}}</h2></a>
+                                    <div class="post-meta d-flex align-items-center">
+                                        <a href="#" class="post-like"><img src="{% static 'img/core-img/like.png' %}" alt=""> <span>392</span></a>
+                                        <a href="#" class="post-comment"><img src="{% static 'img/core-img/chat.png' %}" alt=""> <span>10</span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                           {% endfor %} 
+
+                          <!-- <div class="col-12 col-lg-4">
+                    <div class="section-heading">
+                        <h6>Info</h6>
+                    </div>
+                  Popular News Widget -->
+             <!--        <div class="popular-news-widget mb-30">
+                        <h3>4 Most Popular News</h3>
+
+                    Single Popular Blog -->
+                    <!--     <div class="single-popular-post">
+                            <a href="#">
+                                <h6><span>1.</span> Amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales.</h6>
+                            </a>
+                            <p>April 14, 2018</p>
+                        </div>
+ -->
+          </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+ 
+{% endblock %}

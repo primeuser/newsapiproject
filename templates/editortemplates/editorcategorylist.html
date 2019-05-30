@@ -1,0 +1,23 @@
+{% extends 'editortemplates/editorbase.html' %}
+{% load static %}
+{% block body %}
+
+
+
+<table>
+<thead>
+    <th>S.N</th>
+    <th>Title</th>
+</thead>
+
+<tbody>
+{% for news in editorcategorylist %}
+<tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{news.title}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</thead>
+</table>
+{% endblock %}

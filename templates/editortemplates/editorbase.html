@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title></title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<button type="submit" ><a href ="{% url 'newsapp:editornewslist'%}"> Post List</a></button>
+<button type="submit"><a href ="{% url 'newsapp:editorcategorylist'%}">Category list</a></button>
+<button type="submit"><a href ="{% url 'newsapp:editornewscreate'%}"> News Create</a></button>
+<button type="submit"><a href ="{% url 'newsapp:editorcategorycreate'%}"> Category Create</a></button>
+
+{% block body %}
+ {% endblock %}
+</body>
+</html>

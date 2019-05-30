@@ -1,0 +1,417 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    
+
+    <!-- Favicons -->
+    <link rel="icon" href="{% static 'adminstatic/images/favicon.png' %}">
+
+    <title>Hamro News Portal Admin Panel | {% block title %}{% endblock %}</title>
+
+
+    <meta charset="UTF-8">
+    <meta name="description" content="CMS fits for every site.">
+    <meta name="keywords" content="Developer Anand "> 
+    <meta name="author" content="Sarobar Technology">
+
+
+    <meta itemprop="name" content="Marigold Dashboard, Sarobar Technology">
+    <meta itemprop="description" content="Marigold Dashboard, A beautiful and powerful CMS made by Sarobar Technology">
+
+
+
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+ 
+<!-- <link href="{% static 'clientstatic/css/datetimepicker.css' %}" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="{% static 'adminstatic/css/marigold-dashboard.min.css' %}">
+    <link rel="stylesheet" href="{% static 'adminstatic/css/style.css' %}">
+<!--     <link rel="stylesheet" href="{% static 'clientstatic/css/select2.min.css' %}" /> -->
+
+
+    {% block css %}
+
+
+    {% endblock %}
+
+    <style>
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .ps-scrollbar-y-rail {
+        background-color: #191919 !important;
+    }
+    .ps-scrollbar-y {
+        width: 6px !important;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+
+    }
+    #datetimepicker3 {
+        width: 300px;
+
+    }
+  #datetimepicker4 {
+        width: 300px;
+
+    }
+
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+
+    ::-webkit-scrollbar-track:hover {
+        background: #f1f1f1;
+    }
+     
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 10px !important;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #8C8C8C !important; 
+    }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-background-color="black">
+            <div class="logo">
+                <div class="container-fluid" style="margin-left: 50px">
+                    <a href="{% url 'newsapp:adminpanel' %}" class="simple-text logo-normal">News
+                        <img src="{{organizationl.logo.url}}" style="max-height: 40px; border-radius: 10px;display: inline-block; "> 
+                    </a>
+                </div>
+            </div>
+
+            <div class="sidebar-wrapper">
+                <div class="user">
+                    <div class="photo">
+                        <img style="background: #d8d8d8;" src="{% static 'adminstatic/images/faces/avatar.svg' %}" />
+                    </div>
+                    <div class="user-info">
+                        <a data-toggle="collapse" href="#collapseExample" class="username">
+                            <span>
+                               {{user.username}}
+                              <b class="caret"></b>
+                            </span>
+                        </a>
+                        <div class="collapse" id="collapseExample">
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'newsapp:logout' %}">
+                                      <span class="sidebar-mini"><i style="padding-top: 0.1rem;font-size: 1.5rem;" class="material-icons">power_settings_new</i></span>
+                                      <span class="sidebar-normal"> Logout </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav">
+
+                    <!-- <li id="{% block adminhomeid %}{% endblock %}" class="nav-item {% block adminhome %} {% endblock %} ">
+                        <a class="nav-link" href="{% url 'newsapp:adminpanel' %}">
+                            <i class="material-icons">dashboard</i>
+                            <p> Dashboard </p>
+                        </a>
+                    </li> -->
+                    <li id="{% block bloglistid %}{% endblock %}" class="nav-item {% block active1 %} {% endblock %} ">
+                        <a class="nav-link" href="{% url 'newsapp:adminpostlist' %}">
+                            <i class="material-icons">web</i>
+                            <p> Post</p>
+                        </a>
+                    </li>
+
+                    <li id="" class="nav-item {% block active2 %} {% endblock %} ">
+                        <a class="nav-link" href="{% url 'newsapp:admincategorylist' %}">
+                            <i class="material-icons">web</i>
+                            <p> Category</p>
+                        </a>
+                    </li>
+                     <li id="" class="nav-item {% block active3 %} {% endblock %} ">
+                        <a class="nav-link" href="{% url 'newsapp:adminsliderlist' %}">
+                            <i class="material-icons">web</i>
+                            <p> Slider</p>
+                        </a>
+                    </li>
+                    <li id="{% block messagelistid %}{% endblock %}" class="nav-item{% block active4 %} {% endblock %}">
+                        <a class="nav-link" href="{% url 'newsapp:adminmessagelist' %}">
+                         <i class="material-icons">messages</i>
+                            <p>Messages</p>
+                        </a>
+                    </li>
+
+                     <li id="" class="nav-item{% block active5 %} {% endblock %}">
+                        <a class="nav-link" href="{% url 'newsapp:adminsubscriberlist' %}">
+                            <i class="material-icons">web</i>
+                         
+                            <p>Subscriber</p>
+                        </a>
+                    </li>
+                  <!--   <li id="" class="nav-item ">
+                        <a class="nav-link" href="{% url 'newsapp:adminpostlist' %}">
+                         <i class="material-icons">web</i> -->
+                     <!--        <p> Post List</p>
+
+
+                        </a>
+                    </li> -->
+                    <li class="nav-item">
+                   <a class="nav-link" href="{% url 'newsapp:logout' %}">
+                                      <span class="sidebar-mini"><i style="padding-top: 0.1rem;font-size: 1.5rem;" class="material-icons">power_settings_new</i>
+                                      <span class="sidebar-normal"><h5>Logout</h5>  </span>
+                                    </a>
+                    </li>
+                </ul>
+                <hr color="white">
+                <ul class="h6 p-2 text-center text-muted">
+                    <p style="font-size: 16px;">Marigold Dashboard </p>
+                    <a style="color: #F98B06;" href="https://www.sarobartech.com">&copy; 2019 Sarobar Technology</a>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute fixed-top">
+            	<div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-minimize">
+                            <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+                                <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+                                <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+                            </button>
+                        </div>
+                         <div class="po" style="margin: left=10px;">
+            			<a class="navbar-brand">
+                       <h2>{{organizationl.name}}</h2>
+                        </a>
+                        </div>
+                    </div>
+                    <a class="btn btn-danger" href="{% url 'newsapp:logout' %}">Visit Site</a>
+
+            		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="sr-only">Toggle navigation</span>
+            			<span class="navbar-toggler-icon icon-bar"></span>
+            			<span class="navbar-toggler-icon icon-bar"></span>
+            			<span class="navbar-toggler-icon icon-bar"></span>
+            		</button>
+            	</div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content" style=" margin-right: 265px; margin-left: -260px;">
+                <h4 style="color:red;"> Welcome {{user.username}}</h4>
+
+                       {% block body %}
+                        
+                         {% endblock %}
+                            <div class="modal fade" id="clinic-modal" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">                
+                                    </div>
+                                </div>
+                            
+                        
+                    </div>
+              
+            </div>
+        </div>
+    </div>
+
+       
+
+
+    <!--   Core JS Files   -->
+
+
+<script src="{% static 'adminstatic/js/core/jquery.min.js' %}"></script>
+<script src="{% static 'adminstatic/js/core/popper.min.js' %}"></script>
+
+
+<script src="{% static 'adminstatic/js/bootstrap-marigold-design.js' %}"></script>
+
+
+<script src="{% static 'adminstatic/js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
+/8
+<script src="{% static 'adminstatic/js/plugins/moment.min.js' %}"></script>
+
+<script src="{% static 'adminstatic/js/plugins/bootstrap-datetimepicker.min.js' %}"></script>
+
+<script src="{% static 'adminstatic/js/plugins/nouislider.min.js' %}"></script>
+
+
+
+<script src="{% static 'adminstatic/js/plugins/bootstrap-selectpicker.js' %}"></script>
+
+<script src="{% static 'adminstatic/js/plugins/bootstrap-tagsinput.js' %}"></script>
+
+<script src="{% static 'adminstatic/js/plugins/jasny-bootstrap.min.js' %}"></script>
+
+<script src="{% static 'adminstatic/js/modernizr.js' %}"></script>
+
+
+<script src="{% static 'adminstatic/js/marigold-dashboard.js' %}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+
+<script src="{% static 'adminstatic/js/plugins/arrive.min.js' %}" type="text/javascript"></script>
+
+<script src="{% static 'adminstatic/js/plugins/jquery.validate.min.js' %}"></script>
+
+
+
+<!--  Charts Plugin, full documentation here: https://gionkunz.github.io/chartist-js/ -->
+<script src="{% static 'adminstatic/js/plugins/chartist.min.js' %}"></script>
+
+<!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+<script src="{% static 'adminstatic/js/plugins/jquery.bootstrap-wizard.js' %}"></script>
+
+<!--  Notifications Plugin, full documentation here: http://bootstrap-notify.remabledesigns.com/    -->
+<script src="{% static 'adminstatic/js/plugins/bootstrap-notify.js' %}"></script>
+
+
+<!-- Sliders Plugin, full documentation here: https://refreshless.com/nouislider/ -->
+<script src="{% static 'adminstatic/js/plugins/nouislider.min.js' %}"></script>
+
+<!--  Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+<script src="{% static 'adminstatic/js/plugins/jquery.select-bootstrap.js' %}"></script>
+
+
+
+<!-- Sweet Alert 2 plugin, full documentation here: https://limonte.github.io/sweetalert2/ -->
+<script src="{% static 'adminstatic/js/plugins/sweetalert2.js' %}"></script>
+
+<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+<script src="{% static 'adminstatic/js/plugins/jasny-bootstrap.min.js' %}"></script>
+
+<!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+<script src="{% static 'adminstatic/js/plugins/fullcalendar.min.js' %}"></script>
+<script src="{% static 'clientstatic/js/moment.js' %}"></script>
+<script src="{% static 'clientstatic/js/datetimepicker.js' %}"></script>
+<script src="{% static 'adminstatic/js/smooth-scroll.min.js' %}"></script>
+<script src="{% static 'adminstatic/js/app.js' %}"></script>
+<script src="{% static 'adminstatic/js/particles.js' %}"></script>
+<script src="{% static 'adminstatic/js/select2.min.js' %}"></script>
+
+
+
+
+
+<script type="text/javascript">
+    $('#clinic-modal').on('show.bs.modal', function (e) {
+
+    var button = $(e.relatedTarget);
+    var modal = $(this);
+    modal.find('.modal-content').load(button.data("remote"));
+
+});
+</script>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+ 
+  //init DateTimePickers
+  md.initFormExtendedDatetimepickers();
+  
+
+});
+
+</script>
+<script>
+jQuery(document).ready(function() {
+    jQuery('#active')[0].scrollIntoView();
+});
+
+</script>
+<script type="text/javascript">
+// In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('.form-doctor').select2({
+      placeholder: 'Select Doctor',
+      });
+   });
+
+</script>
+<script type="text/javascript">
+// In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('#day').select2({
+      placeholder: 'Select Day',
+      });
+   });
+
+</script>
+<script>
+$(document).ready(function() {
+    $('#verify').select2({
+      placeholder: 'Status',
+      });
+   });
+
+</script>
+
+<script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+              format: 'YYYY-MM-DD',
+            });
+        });
+    </script>
+
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker2').datetimepicker({
+      format: 'YYYY-MM-DD HH:mm:ss'
+    });
+  });
+</script> 
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker3').datetimepicker({
+                    format: 'HH:mm:ss'
+                });
+            });
+</script>
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker4').datetimepicker({
+                    format: 'HH:mm:ss'
+                });
+            });
+</script>
+{% block js %}
+
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends 'editortemplates/editorbase.html' %}
+{% load static %}
+{% block body %}
+
+
+
+<table style="width: 100%; margin-top: 20px;">
+<thead>
+    <th>S.N</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Author</th>
+    <th>Category</th>
+    <th>Date_created</th>
+</thead>
+
+<tbody>
+{% for news in editornewslist %}
+<tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{news.title}}</td>
+    <td>{{news.description}}</td>
+    <td>{{news.author}}</td>
+    <td>{{news.category}}</td>
+    <td>{{news.date_created}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</thead>
+</table>
+{% endblock %}

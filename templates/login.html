@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	<title>Clinic1 Admin Panel | Login</title>
+</head>
+<body>
+<header>
+<div class="d-block h1 py-5 text-center bg-dark text-light">Hamro News Portal Admin Panel</div>
+</header>
+<div class="col-md-4 mx-auto justify-content-center">
+	<form class="form-group" method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+		{% if request.GET.next %}
+		<input type="hidden" name="next" value="{{request.GET.next}}">
+		{% endif %}
+		{% if errors %}
+		<div class="alert alert-danger">
+			{{errors}}
+		</div>
+		{% endif %}
+		<br>
+		<button class="w-100 btn btn-dark">Login</button>
+	</form>
+</div>
+</body>
+</html>

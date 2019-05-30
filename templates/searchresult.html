@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Search Result {% endblock %}
+{% block active8 %} active {% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block body %}
+<div class="search-container">
+{% if postlist %}
+        <div class="row">
+        	<div class="container">
+          {% for post in postlist %}
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="blog-item">
+            	<br>
+            	<br>
+              <div class="blog-item-image"> <img src="{{post.image.url}}" alt="" style="width:384px; height: 267px; object-fit: cover;" />
+              </div>
+              <div class="blog-item-desc">
+                <div class="blog-item-title">
+                  <h3><a href="{% url 'newsapp:postdetail' post.id %}">{{post.title|title}}</a></h3>
+                </div>
+                <div class="blog-item-text">
+                  <p>{{post.description|safe}}</p>
+       			</div>
+                <div class="blog-item-button"><a href="{% url 'newsapp:postdetail' post.id %}" class="btn btn-primary-1">READ MORE</a></div>
+                <br>
+                <br>
+              </div>
+            </div>
+          </div>
+               {% endfor %}
+           </div>
+	</div>
+   
+	{% else %}
+	<p style="text-align: center;">Nothing matched your search criteria.</p>
+	 {% endif %}
+	 </div>
+
+{% endblock %}

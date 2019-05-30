@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+
+	<h3>News Detail (Category: {{newsdetail.category}})</h3>
+	<div class="row">
+		<div class="col-md-3">{{newsdetail.title}}</div>
+		<div class="col-md-3">{{newsdetail.count}}</div>
+		<div class="col-md-3">{{newsdetail.description| truncatechars:'150'}}</div>
+		<div class="col-md-3"><img src="{{newsdetail.image.url}}" class="img-fluid" width="150"></div>
+	</div>		
+	<h3>यो पनि पढौँ</h3><hr>
+	{% for n in news.category.news.all %}
+	{% if n.title != news.title %}
+	<li><a href="{% url 'newsapp:newsdetail' n.id %}">{{n.title}}</a></li>
+	{% endif %}
+	{% endfor %}
+<div class="container">
+<div class="col-md-6">
+<canvas id="myChart" style=" width: 200px; "></canvas>
+<br>
+</div>
+</div>
+<div class="container">
+<div class="col-md-6">
+<canvas id="myChart1" style=" width: 200px; "></canvas>
+<br>
+</div>
+</div>
+<div class="container">
+<canvas id="myChart2" style=" width: 200px; "></canvas>
+<br>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+
+
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var stat = '{% for count in top_five %}{% if not forloop.counter == 1 %},{% endif %}{{count.count}}{% endfor %}'
+var stats = JSON.parse("[" + stat + "]");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue'],
+        datasets: [{
+            label: '# of Votes',
+            data: stats,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+<script>
+var ctx1 = document.getElementById('myChart1').getContext('2d');
+var stat1 = '{% for count in top_five %}{% if not forloop.counter == 1 %},{% endif %}{{count.count}}{% endfor %}'
+var stats1 = JSON.parse("[" + stat1 + "]");
+var myChart1 = new Chart(ctx1, {
+    type: 'line',
+    data: {
+        labels: ['Red', 'Blue'],
+        datasets: [{
+            label: '# of Votes',
+            data: stats1,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+<script>
+var ctx2 = document.getElementById('myChart2').getContext('2d');
+var stat2 = '{% for count in top_five %}{% if not forloop.counter == 1 %},{% endif %}{{count.count}}{% endfor %}'
+var stats2 = JSON.parse("[" + stat2 + "]");
+var myChart2 = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: ['Red', 'Blue'],
+        datasets: [{
+            label: '# of Votes',
+            data: stats2,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+{% endblock %}

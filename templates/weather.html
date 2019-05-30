@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block body %}
+<!-- the_weather/weather/index.html -->
+<div class="container">
+<div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+		<div class="column is-offset-4 is-4">
+	
+	{% for weather in weather_data %}
+	<div class="box">
+		<article class="media">
+			<div class="media-left">
+				<figure class="image is-50x50">
+					<img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
+				</figure>
+			</div>
+			<div class="media-content">
+				<div class="content">
+					<p>
+						<span class="title">{{ weather.city }}</span>
+						<br>
+						<span class="subtitle">{{ weather.temperature }}° F</span>
+						<br> {{ weather.description }}
+					</p>
+				</div>
+			</div>
+		</article>
+	</div>
+	{% endfor %}
+</div>
+</div>
+	</div>
+	<div class="col-md-3"></div>
+</div>
+
+{% endblock %}

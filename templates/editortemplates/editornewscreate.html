@@ -1,0 +1,10 @@
+{% extends 'editortemplates/editorbase.html' %}
+{% load static %}
+
+{% block body %}
+<form method="POST" enctype="multipart/form-data" style="margin-top: 20px; ">
+{% csrf_token %}
+{{form.as_p}}
+<button type="submit">Create</button>
+</form>
+{% endblock %}
