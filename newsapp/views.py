@@ -7,13 +7,6 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from .models import *
 from .forms import *
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse, reverse_lazy
-from django.views import generic
-from django.db.models import Q
-from rest_framework import status
-from rest_framework import generics
-from rest_framework import serializers, viewsets, routers
 from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
